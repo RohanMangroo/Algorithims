@@ -40,8 +40,8 @@ function quickSortHelper(start, stop, array) {
     }
 
     //Moving the pointers if they have not found what they needed in order to be swapped
-    if (array[left] < array[pivot]) left++;
-    if (array[right] > array[pivot]) right--;
+    if (array[left] <= array[pivot]) left++;
+    if (array[right] >= array[pivot]) right--;
   }
   swap(pivot, right, array);
 
