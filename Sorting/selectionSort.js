@@ -31,7 +31,6 @@ function selectionSort(array) {
   return array;
 }
 
-//Swapping function
 function swap(posOne, posTwo, array) {
   [array[posOne], array[posTwo]] = [array[posTwo], array[posOne]];
 }
