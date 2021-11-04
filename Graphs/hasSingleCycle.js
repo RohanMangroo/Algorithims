@@ -1,7 +1,9 @@
 //Given an array return a boolean if the array has a single cycle
-//The cycle consists of moving from one index to the other in this fashion, the elements value will determine how many steps forward or backwards you take
+//The cycle consists of moving from one index to the other in this fashion...the elements value will determine how many steps forward or backwards you take
+
 //Positive element goes forward
 //Negative element goes backwards
+
 //If at any point you reach the end of the array, you wrap around
 //For example if you are at the end of the array and your current element is 1, you simply wrap around to the beginning of the array
 
@@ -39,8 +41,14 @@ function hasSingleCycle(array) {
 
 //This is the optimal solution using O(n) time but O(1) space
 //In this solution we are paying attention to an origin point and a length property
-//In our loop we need to check if we have ever seen the origin before, if we have and length is NOT equal to the length of the array then we do not have a single cycle and we return false
-//If we have seen the origin before and length DOES equal array.length then we have a single cycle
+
+//We need to account for 3 situations
+
+//1)If we arrive at the origin point and the length !== array.length, that means we have a cycle but this cycle does not include all the elements, so return false
+
+//2)If we arrive at the origin point and the length === array.length, that means we have a cycle and this cycle includes all the elements, so return true
+
+//3)The length property exceeds array.length but we have never arrived at origin, this means there is a cycle but it does not include the origin point
 function hasSingleCycle(array) {
   const origin = 0;
   let length = 0;
@@ -58,9 +66,10 @@ function hasSingleCycle(array) {
     currentIndex = newIndex;
     length++;
 
+    //Here we are checking for the first 2 situations
     if (currentIndex === origin && length !== array.length) return false;
     if (currentIndex === origin && length === array.length) return true;
   }
-
+  //The default case is the 3rd situation and happens when we break out of the loop
   return false;
 }
