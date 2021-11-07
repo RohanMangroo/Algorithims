@@ -3,6 +3,13 @@
 //To solve this problem we must employ the binary search algo
 //Split the array in half, that becomes a new node and every left and right child of that new node are the recursive calls
 
+//One tricky part about this problem is the base case in the recursion
+//Originally I thought that the base case could be if(start === stop), but it turns out that's not the case
+
+//When the midpoint is calculated it could potentially land on top of the start position which would result in the next version of the stop being at midpoint - 1. That would mean start is now greater than stop
+
+//If start === stop we can still calculate a midpoint but if start is greater than stop we cannot, so start > stop will be our base case
+
 function minHeightBst(array) {
   return helperFunction(0, array.length - 1, array);
 }
