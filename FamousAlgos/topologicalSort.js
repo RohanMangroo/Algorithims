@@ -38,3 +38,63 @@ function helperFunction(order, list, currentNode, info) {
   if (info.returnEmpty) order.length = 0;
   else order.push(currentNode);
 }
+
+//=====================================================//
+function topologicalSort(jobs, deps) {
+  const order = [];
+  const jobGraph = new JobGraph(jobs, deps);
+
+  for (let i = 0; i < jobs.length; i++) {
+    const currentJob = jobs[i];
+    traverseJobDependencies(currentJob, jobGraph, order);
+  }
+
+  return jobGraph.cycleDetected ? [] : order;
+}
+
+function traverseJobDependencies(currentJob, jobGraph, order) {
+  const currentJobNode = jobGraph.nodeMap[currentJob];
+
+  if (currentJobNode.visited) return;
+  if (currentJobNode.inProgress) return (jobGraph.cycleDetected = true);
+
+  currentJobNode.inProgress = true;
+
+  const currentDependencies = jobGraph.dependencyMap[currentJobNode.value];
+  for (let i = 0; i < currentDependencies.length; i++) {
+    const currentDependency = currentDependencies[i];
+    traverseJobDependencies(currentDependency.value, jobGraph, order);
+  }
+
+  order.push(currentJob);
+  currentJobNode.visited = true;
+}
+
+class JobGraph {
+  constructor(jobs, deps) {
+    this.nodeMap = this.createNodeMap(jobs);
+    this.dependencyMap = this.createDependencyMap(jobs, deps);
+    this.cycleDetected = false;
+  }
+
+  createNodeMap(jobs) {
+    const map = {};
+    jobs.forEach((job) => (map[job] = new Node(job)));
+    return map;
+  }
+
+  createDependencyMap(jobs, deps) {
+    const map = {};
+    jobs.forEach((job) => (map[job] = []));
+    deps.forEach((dep) => map[dep[1]].push(this.nodeMap[dep[0]]));
+    return map;
+  }
+}
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.visited = false;
+    this.inProgress = false;
+  }
+}
