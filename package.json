@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon  Sandbox/BinarySearchTree.js"
+    "start": "nodemon  Sandbox/Stack.js"
   },
   "repository": {
     "type": "git",
