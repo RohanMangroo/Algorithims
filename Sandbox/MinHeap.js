@@ -81,6 +81,6 @@ const myHeap = new MinHeap(array);
 myHeap.insert(-4);
 myHeap.insert(234);
 const minNumOne = myHeap.remove();
-console.log(myHeap.heap);
+// console.log(myHeap.heap);
 const minNumTwo = myHeap.remove();
-console.log(myHeap, minNumOne, minNumTwo);
+// console.log(myHeap, minNumOne, minNumTwo);
