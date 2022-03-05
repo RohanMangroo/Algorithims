@@ -18,3 +18,5 @@ const array = [1, 2, 3, 4];
 // console.log(getPermutaions(array));
 
 console.log(Number(`${array[0]}${array[1]}`));
+//**
+ */
