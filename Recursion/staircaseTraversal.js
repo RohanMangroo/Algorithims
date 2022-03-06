@@ -29,3 +29,27 @@ function helperFunction(height, stepsArray, currentSum, result) {
     else return;
   }
 }
+
+function staircaseTraversal(height, maxSteps) {
+  const arrayOfWays = [1];
+  let windowStart = 0;
+  let windowEnd = 0;
+  let windowSum = 1;
+
+  for (let i = 1; i <= height; i++) {
+    const windowLength = windowEnd - windowStart + 1;
+    if (windowLength < maxSteps) {
+      windowEnd++;
+      arrayOfWays.push(windowSum);
+      windowSum += arrayOfWays[arrayOfWays.length - 1];
+    } else {
+      arrayOfWays.push(windowSum);
+      windowSum += arrayOfWays[arrayOfWays.length - 1];
+      windowSum -= arrayOfWays[windowStart];
+      windowStart++;
+      windowEnd++;
+    }
+  }
+
+  return arrayOfWays[arrayOfWays.length - 1];
+}
