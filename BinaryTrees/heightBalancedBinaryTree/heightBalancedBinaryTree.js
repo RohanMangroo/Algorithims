@@ -13,9 +13,9 @@ class BinaryTree {
 }
 
 function heightBalancedBinaryTree(tree) {
-  const result = { isBalanced: true };
+  const result = { isBalanced: true, difference: null };
   helperFunction(tree, result);
-  return result.isBalanced;
+  return result;
 }
 
 function helperFunction(node, result) {
@@ -26,8 +26,14 @@ function helperFunction(node, result) {
     const rightHeight = helperFunction(node.right, result);
 
     const heightDiff = Math.abs(leftHeight - rightHeight);
+    result.difference = heightDiff;
     if (heightDiff > 1) result.isBalanced = false;
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
 }
+
+module.exports = {
+  heightBalancedBinaryTree,
+  helperFunction,
+};

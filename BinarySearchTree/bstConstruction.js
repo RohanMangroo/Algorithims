@@ -61,7 +61,6 @@ class BST {
   }
 
   reassignPointers(node) {
-    console.log(node.value);
     if (node.left) {
       node.value = node.left.value;
       node.right = node.left.right;

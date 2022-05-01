@@ -1,4 +1,5 @@
-const array = [1, 2, 3, 4];
+'use strict';
+// const array = [1, 2, 3, 4];
 
 // function getPermutaions(array, currentPerm = '', max = { num: -Infinity }) {
 //   if (currentPerm.length === 4 && !array.length) {
@@ -17,6 +18,4 @@ const array = [1, 2, 3, 4];
 
 // console.log(getPermutaions(array));
 
-console.log(Number(`${array[0]}${array[1]}`));
-//**
- */
+// console.log(Number(`${array[0]}${array[1]}`));
